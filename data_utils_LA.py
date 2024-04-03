@@ -15,7 +15,7 @@ class ASVDataset(Dataset):
     def __init__(self, database_path=None,protocols_path=None,transform=None, 
         is_train=True, sample_size=None, 
         is_logical=True, feature_name=None, is_eval=False,
-        eval_part=0):
+        eval_part=0, num_files=10000):
 
         track = 'LA'   
         data_root=protocols_path      
@@ -94,15 +94,18 @@ class ASVDataset(Dataset):
         self.transform = transform
 
         if os.path.exists(self.cache_fname):
-            self.data_x, self.data_y, self.data_sysid, self.files_meta = torch.load(self.cache_fname)
-            print('Dataset loaded from cache ', self.cache_fname)
+                    self.data_x, self.data_y, self.data_sysid, self.files_meta = torch.load(self.cache_fname)
+                    print('Dataset loaded from cache ', self.cache_fname)
         else:
             self.files_meta = self.parse_protocols_file(self.protocols_fname)
+            if num_files is not None:  # Limit the number of files here
+                self.files_meta = self.files_meta[:num_files]
             data = list(map(self.read_file, self.files_meta))
             self.data_x, self.data_y, self.data_sysid = map(list, zip(*data))
             
             if self.transform:
-                self.data_x = Parallel(n_jobs=4, prefer='threads')(delayed(self.transform)(x) for x in self.data_x)
+                # Removed parallel processing
+                self.data_x = [self.transform(x) for x in self.data_x]
             torch.save((self.data_x, self.data_y, self.data_sysid, self.files_meta), self.cache_fname)
             
         if sample_size:

@@ -1,0 +1,92 @@
+╭─ ~/De/rawnet2-antispoofing  main !2 ?5 
+╰─ python main.py --track=logical --loss=CCE   --lr=0.0001 --batch_size=10 --database_path=/home/stu/Documents/2021/LA/LA --protocols_path=/home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols
+main.py:162: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  parser1 = yaml.load(f_yaml)
+sysid_dict_inv {0: '-', 1: 'A01', 2: 'A02', 3: 'A03', 4: 'A04', 5: 'A05', 6: 'A06'}
+data_root /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols
+dset_name dev
+protocols_fname dev.trl
+protocols_dir /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols
+files_dir /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_dev/flac
+protocols_file /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols/ASVspoof2019.LA.cm.dev.trl.txt
+cache_fname cache_dev_LA_Raw_audio.npy
+Dataset loaded from cache  cache_dev_LA_Raw_audio.npy
+sysid_dict_inv {0: '-', 1: 'A01', 2: 'A02', 3: 'A03', 4: 'A04', 5: 'A05', 6: 'A06'}
+data_root /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols
+dset_name train
+protocols_fname train.trn
+protocols_dir /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols
+files_dir /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_train/flac
+protocols_file /home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols/ASVspoof2019.LA.cm.train.trn.txt
+cache_fname cache_train_LA_Raw_audio.npy
+Dataset loaded from cache  cache_train_LA_Raw_audio.npy
+
+Epoch 0 started...
+ 	 85.59
+Epoch: 0 | Running Loss: 0.2395975585738197 | Train Accuracy: 85.59% | Validation Accuracy: 62.72%
+**************************************************
+dev_acc %f 62.724999999999994
+**************************************************
+
+Epoch 1 started...
+ 	 94.66
+Epoch: 1 | Running Loss: 0.118509109063918 | Train Accuracy: 94.66% | Validation Accuracy: 83.98%
+**************************************************
+dev_acc %f 83.985
+**************************************************
+
+Epoch 2 started...
+ 	 98.13
+Epoch: 2 | Running Loss: 0.05071810248568909 | Train Accuracy: 98.13% | Validation Accuracy: 82.59%
+**************************************************
+dev_acc %f 82.59
+**************************************************
+
+Epoch 3 started...
+ 	 98.43
+Epoch: 3 | Running Loss: 0.03724139518631273 | Train Accuracy: 98.43% | Validation Accuracy: 82.12%
+**************************************************
+dev_acc %f 82.12
+**************************************************
+
+Epoch 4 started...
+ 	 99.230
+Epoch: 4 | Running Loss: 0.02164007864067753 | Train Accuracy: 99.23% | Validation Accuracy: 79.94%
+**************************************************
+dev_acc %f 79.94
+**************************************************
+
+Epoch 5 started...
+ 	 98.88
+Epoch: 5 | Running Loss: 0.03301275890579927 | Train Accuracy: 98.88% | Validation Accuracy: 83.53%
+**************************************************
+dev_acc %f 83.535
+**************************************************
+
+Epoch 6 started...
+ 	 99.390
+Epoch: 6 | Running Loss: 0.01608694950514655 | Train Accuracy: 99.39% | Validation Accuracy: 89.09%
+**************************************************
+dev_acc %f 89.095
+**************************************************
+
+Epoch 7 started...
+ 	 99.610
+Epoch: 7 | Running Loss: 0.009347778577074223 | Train Accuracy: 99.61% | Validation Accuracy: 90.69%
+**************************************************
+dev_acc %f 90.685
+**************************************************
+
+Epoch 8 started...
+ 	 98.930
+Epoch: 8 | Running Loss: 0.02803774101391633 | Train Accuracy: 98.93% | Validation Accuracy: 94.94%
+**************************************************
+dev_acc %f 94.935
+**************************************************
+
+Epoch 9 started...
+ 	 99.730
+Epoch: 9 | Running Loss: 0.011103253583951301 | Train Accuracy: 99.73% | Validation Accuracy: 84.65%
+**************************************************
+dev_acc %f 84.64500000000001
+**************************************************

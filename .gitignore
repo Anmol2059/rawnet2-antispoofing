@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+cache_dev_LA_Raw_audio.npy
+cache_eval_LA_Raw_audio.npy
+cache_train_LA_Raw_audio.npy
+logs/
+models/

@@ -12,7 +12,7 @@ from torch import nn
 from model import RawNet
 from tensorboardX import SummaryWriter
 
-
+import ipdb
 
 
 def keras_lr_decay(step, decay = 0.0001):
@@ -106,6 +106,7 @@ def train_epoch(data_loader, model, lr,optim, device):
     criterion = nn.CrossEntropyLoss(weight=weight)
     
     for batch_x, batch_y, batch_meta in train_loader:
+        # ipdb.set_trace()
        
         batch_size = batch_x.size(0)
         num_total += batch_size
@@ -138,12 +139,12 @@ if __name__ == '__main__':
     parser.add_argument('--model_path', type=str,
                         default=None, help='Model checkpoint')
    
-    parser.add_argument('--database_path', type=str, default='/your/path/to/data/ASVspoof_database/', help='change this to user\'s full directory address of LA database')
-    parser.add_argument('--protocols_path', type=str, default='database/ASVspoof2019_LA_cm_protocols/', help='Change with path to user\'s LA database protocols directory address')
+    parser.add_argument('--database_path', type=str, default='/home/stu/Documents/2021/LA/LA', help='change this to user\'s full directory address of LA database')
+    parser.add_argument('--protocols_path', type=str, default='/home/stu/Documents/2021/LA/LA/ASVspoof2019_LA_cm_protocols', help='Change with path to user\'s LA database protocols directory address')
     parser.add_argument('--eval_output', type=str, default=None,
                         help='Path to save the evaluation result')
     parser.add_argument('--batch_size', type=int, default=32)
-    parser.add_argument('--num_epochs', type=int, default=100)
+    parser.add_argument('--num_epochs', type=int, default=10)
     parser.add_argument('--lr', type=float, default=0.0001)
     parser.add_argument('--weight_decay', type=float, default=0.0001)
     parser.add_argument('--comment', type=str, default=None,
@@ -200,8 +201,8 @@ if __name__ == '__main__':
     # Dataloader
     dev_set = data_utils_LA.ASVDataset(database_path=args.database_path,protocols_path=args.protocols_path,is_train=False, is_logical=is_logical,
                                     transform=transforms,
-                                    feature_name=args.features, is_eval=args.is_eval, eval_part=args.eval_part)
-    dev_loader = DataLoader(dev_set, batch_size=args.batch_size, shuffle=True)
+                                    feature_name=args.features, is_eval=args.is_eval, eval_part=args.eval_part,num_files=10000)
+    dev_loader = DataLoader(dev_set, batch_size=args.batch_size,shuffle=True)
     
     #torch.backends.cudnn.enabled = False
     
@@ -244,13 +245,14 @@ if __name__ == '__main__':
     writer = SummaryWriter('logs/{}'.format(model_tag))
     best_acc = 99
     for epoch in range(num_epochs):
+        print(f'\nEpoch {epoch} started...')
+
         running_loss, train_accuracy = train_epoch(train_loader,model, args.lr,optimizer, device)
         valid_accuracy = evaluate_accuracy(dev_loader, model, device)
         writer.add_scalar('train_accuracy', train_accuracy, epoch)
         writer.add_scalar('valid_accuracy', valid_accuracy, epoch)
         writer.add_scalar('loss', running_loss, epoch)
-        print('\n{} - {} - {:.2f} - {:.2f}'.format(epoch,
-                                                   running_loss, train_accuracy, valid_accuracy))
+        print('\nEpoch: {} | Running Loss: {} | Train Accuracy: {:.2f}% | Validation Accuracy: {:.2f}%'.format(epoch, running_loss, train_accuracy, valid_accuracy))
         print('*'*50)
         print('dev_acc %f', valid_accuracy)
         if valid_accuracy > best_acc:
